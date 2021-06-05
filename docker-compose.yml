@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_DATABASE:-macable_dev}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/tmp/mysql:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/var/log:/var/log
+      - ./docker/mysql/initialize_sql_files:/docker-entrypoint-initdb.d
