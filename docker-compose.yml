@@ -15,3 +15,11 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/mysql/var/log:/var/log
       - ./docker/mysql/initialize_sql_files:/docker-entrypoint-initdb.d
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - .:/usr/src/macable
+      - /usr/src/macable/node_modules
+      - /usr/src/macable/vendor
